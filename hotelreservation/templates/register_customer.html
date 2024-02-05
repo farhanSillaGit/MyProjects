@@ -1,0 +1,83 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration</title><!-- Google font -->
+	<link href=" https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+	<!-- Custom stylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Clear input values on focus
+        $('input[type="text"]').focus(function() {
+            $(this).val('');
+        });
+    });
+</script>
+
+
+</head>
+<body>
+<div class="row">
+    <div class="booking-form">
+        <div class="form-header">
+            <h1>Registration Form</h1>
+        </div>
+                <form method="post" action="{% url 'register_customer' %}">
+                    <div class="row">
+                        <div class="form-group">
+
+
+    {% csrf_token %}
+    {{ form.username.label_tag }}
+    {{ form.username }}
+    It may contain letters, numbers, and underscores
+    <br>
+    {{ form.email.label_tag }}
+    {{ form.email }}
+
+    <br>
+    {{ form.password1.label_tag }}
+    {{ form.password1 }}
+        <ul>
+            <li>Be at least 8 characters long</li>
+            <li> both uppercase and lowercase letters</li>
+            <li>Contain at least one number</li>
+            <li> Include special characters for added security</li>
+            </ul>
+
+    <br>
+    {{ form.password2.label_tag }}
+    {{ form.password2 }}
+    <!-- Your comment for the password2 field -->
+                                <br>
+    {{ form.is_client }}check for hotel registration
+      <br>
+    {{ form.is_booking_user }}check for booking
+
+
+                                <div class="form-btn"><input type="submit" value="Register">
+                                </div>
+                         </div>
+                    </div>
+
+                </form>
+    </div>
+</div>
+                 <br>
+<br>
+
+
+</body>
+</html>
+{% endblock %}

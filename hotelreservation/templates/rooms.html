@@ -1,0 +1,97 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section Begin -->
+<section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="hero-text">
+                        <h1>Sona A Luxury Hotel</h1>
+                        <p>Here are the best hotel booking sites, including recommendations for international
+                            travel and for finding low-priced hotel rooms.</p>
+                        <a href="#" class="primary-btn">Discover Now</a>
+                </div>
+            </div>
+        </div>
+       <div class="hero-slider owl-carousel">
+  {% for room in rooms %}
+    {% for img in images %}
+        {% if img.room_id == room.id %}
+            <div class="hs-item set-bg" data-setbg="{{ img.room_image.url }}"></div>
+        {% endif %}
+    {% endfor %}
+           {% endfor %}
+</div>
+     </section>
+    <!-- Hero Section End -->
+<!-- Services Section End -->
+    <section class="services-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>What We have</span>
+                        <h2>Discover Our Rooms</h2>
+                    </div>
+                </div>
+            </div>
+<div style="display: flex; flex-wrap: wrap; justify-content:flex-start">
+
+{% for room in rooms %}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+
+            {{room.room_type}}
+        </div>
+        <div class="card-body">
+                <div class="row">
+                <div class="col-md-6">
+
+                    <div class="row">
+                 <p class="card-text">{{room.description}}</p>
+                    </div>
+                    <div class="row"><p class="card-text">AED:{{room.price}}</p></div>
+
+                    <div class="row">
+                        <form action="{% url 'room_booking' %}" method="get">
+                                    <input type="hidden" name="room_id" value="{{ room.id }}">
+
+                            <button type="submit" >BOOK</button></form>
+							</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                {% for img in images %}
+                {% if img.room_id == room.id %}
+                    <div class="col-md-6">
+
+                    <img src="{{ img.room_image.url }}" class="img-fluid mb-2" alt="Description" width="300" height="250">
+                    </div>
+                {% endif %}
+
+                {% endfor %}
+                    </div></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endfor %}
+    </div>
+
+    </section>
+    <!-- Services Section End -->
+
+
+
+
+{% endblock %}

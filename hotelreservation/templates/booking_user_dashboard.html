@@ -1,0 +1,139 @@
+{% extends 'base1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking User Dashboard</title>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Stack containers vertically */
+        }
+
+        #navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: right;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .profile-details {
+            flex: 1;
+            background-color: #fff;
+            margin-right: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-picture {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 15px;
+        }
+
+        .profile-details h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-details p {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .view-history {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .booking-item {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .booking-details {
+            font-size: 16px;
+        }
+
+        .hotel-name {
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        .check-in-out {
+            margin-top: 5px;
+            color: #28a745; /* Green color for check-in/out */
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="content-container">
+        <div class="profile-details">
+            <div class="profile-picture">
+                <img src="{{ user_profile.profile_picture.url }}" class="img-fluid" alt="Profile Picture" width="150" height="150">
+            </div>
+            <h1>Welcome, {{ user_profile.user.username }}!</h1>
+            <p>Name : {{ user_profile.full_name }}</p>
+            <p>Address: {{ user_profile.address }}</p>
+
+            <p>Date of Birth: {{ user_profile.date_of_birth }}</p>
+            <p>Nationality: {{ user_profile.nationality }}</p>
+            <p>Place: {{ user_profile.place }}</p>
+            <p>Phone Number: {{ user_profile.phone_number }}</p>
+            <a href="{% url 'edit_booking_user_profile' %}">Edit Profile</a>
+            <!-- You can display other profile information as needed -->
+        </div>
+
+        <div class="view-history">
+            <h2>Booking History</h2>
+            {% if booking_history %}
+                <ul class="booking-list">
+                   {% for booking in booking_history %}
+                        <li class="booking-item">
+                            <div class="booking-details">
+                                <div class="booking-date">Booking Date: {{ booking.booking_date_time }}</div>
+                                <div class="hotel-name">Hotel: {{ booking.room.hotel }}</div>
+                                <div class="room-details">Room: {{ booking.room }}</div>
+                                <div class="check-in-out">
+                                    Check-in: {{ booking.check_in }} &nbsp;|&nbsp; Check-out: {{ booking.check_out }}
+                                </div>
+                                <!-- Add other booking details as needed -->
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No booking history available.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

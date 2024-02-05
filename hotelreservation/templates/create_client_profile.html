@@ -1,0 +1,9 @@
+{% extends 'base1.html' %}
+{% block content %}
+  <h2>Hotel client Register</h2>
+  <form method="post" action="{% url 'create_client_profile' %}"enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">create_client_profile</button>
+  </form>
+{% endblock %}

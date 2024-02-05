@@ -1,0 +1,31 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+
+
+
+</head>
+<body>
+    <h1>Booking Successful</h1>
+    <p>Your booking has been successfully confirmed.</p>
+    <p>Booking details:</p>
+    <ul>
+        <li>User: {{ booking.user.username }}</li>
+        <li>Hotel name:{{hotel_name}}</li>
+        <li>Room type:{{room_type}}</li>
+        <li>Check-in: {{ booking.check_in }}</li>
+        <li>Check-out: {{ booking.check_out }}</li>
+        <li>Number of Rooms: {{ booking.no_of_rooms }}</li>
+        <li>Adults: {{ booking.adults }}</li>
+        <li>Children: {{ booking.children }}</li>
+    </ul>
+    <!-- You can provide additional details or links as needed -->
+</body>
+</html>
+{% endblock %}

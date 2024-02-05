@@ -1,0 +1,68 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block content %}
+<!-- Hero Section Begin -->
+<section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="hero-text">
+                        <h1>LuxeStay UAE</h1>
+                        <p>Discover Dubai: A Fusion of Tradition and Luxury
+                            Welcome to Dubai</p>
+                        <a href="#" class="primary-btn"> Welcome to Dubai</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="{% static 'img/hero/hero-1.jpg' %}" ></div>
+            <div class="hs-item set-bg" data-setbg="{% static 'img/hero/hero-2.jpg' %}"></div>
+            <div class="hs-item set-bg" data-setbg="{% static 'img/hero/hero-3.jpg' %}"></div>
+        </div>
+     </section>
+    <!-- Hero Section End -->
+
+<!-- Services Section End -->
+    <section class="services-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+
+                        <h2>Explore  {{ename}}</h2>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+            {% for result in results %}
+
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <a href="#"><img style="height: 250px; width: 300px;" src="{{ result.hotelimg.url }}" class="card-img-top" alt="Card image cap"></a>
+      {% if result.special_offer %}
+                    <div class="spec_offer text-center"><a href="#">Special Offer </a> </div>
+                    {% endif %}
+                        <a style="text-decoration:none" href="{% url 'viewroom_action' result.id %}" class="card-link">View Rooms</a>
+    <a style="text-decoration:none" href="#" class="card-link">Add to cart</a>
+                        <h4>{{ result.name }}</h4>
+                        <p>{{ result.description }} </p>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+
+
+
+{% endblock %}
+
+
+
+

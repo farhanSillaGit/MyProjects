@@ -1,0 +1,12 @@
+<!-- edit_client_profile.html -->
+
+{% extends 'base1.html' %}
+
+{% block content %}
+    <h2>Edit Client Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+{% endblock %}

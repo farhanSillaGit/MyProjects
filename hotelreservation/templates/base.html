@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Your other head content here -->
+
+    <style>
+        body {
+            background-color: #008080;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: right;
+            height: 50px; /* Set a fixed height for the navigation bar */
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Include the Navigation Bar -->
+    <div id="navbar" class="container">
+        <a href="{% url 'index' %}" style="color:white;font-weight:bold;text-decoration:none;">Home</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'booking_user_dashboard' %}" style="color:white;font-weight:bold;text-decoration:none;">Profile</a>
+            <a href="{% url 'logout_customer' %}" style="color:white;font-weight:bold;text-decoration:none;">Sign out</a>
+        {% else %}
+            <a href="{% url 'login_customer' %}" style="color:white;font-weight:bold;text-decoration:none;">Sign In</a>
+            <a href="{% url 'register_customer' %}" style="color:white;font-weight:bold;text-decoration:none;">Sign Up</a>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <!-- Your existing script links here -->
+
+</body>
+
+</html>
